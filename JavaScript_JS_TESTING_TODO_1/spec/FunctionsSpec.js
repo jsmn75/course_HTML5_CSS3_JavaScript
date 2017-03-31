@@ -1,7 +1,8 @@
 describe("throwDice", function() {
 
-  var diceCount = 1000000;
-  var n = [0, 0, 0, 0, 0, 0];
+  var diceCount = 100000;
+  var n = [0,0,0,0,0,0];
+  var p = [0,0,0,0,0,0];
 
   //test
   it("should return not null", function() {
@@ -31,16 +32,19 @@ describe("throwDice", function() {
         break;
       }
     }
+    if(!fail) {
+      for (var i = 0; i < p.length; i++) {
+        p[i] = (n[i] * 100) / diceCount;
+        console.log("n["+i+"]: " + n[i] + "  p[" +i+ "]: " +p[i]);
+      }
+    }
     expect(!fail).toBe(true);
   });
 
-  it("after one million executions dice is stadistic equilibrate", function() {
+  it("after " + diceCount + " executions dice is stadistic equilibrate" , function() {
     var fail = false;
-    var p = [0,0,0,0,0,0];
-    diceCount = 1000000;
     for (var i = 0; i < p.length; i++) {
-      p[i] = (n[i] * 100) / diceCount;
-      if( (p[i] < 16.5) || (p[i] > 16.8) ) {
+      if( (p[i] < 13.6) || (p[i] > 19.6) ) {
         fail = true;
         break;
       }
